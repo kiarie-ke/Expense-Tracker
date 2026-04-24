@@ -1,4 +1,5 @@
-import { useForm, Controller } from "react-hook-form";
+import { useEffect } from "react";
+import { useForm, Controller, type SubmitHandler } from "react-hook-form";
 import {
   Dialog,
   DialogContent,
@@ -26,26 +27,54 @@ import {
 interface AddExpenseModalProps {
   showAddExpenseModal: boolean;
   setShowAddExpenseModal: (open: boolean) => void;
+  initialData?: IExpense;
+  onSaveExpense: (formData: IExpense) => void;
 }
 const AddExpenseModal = ({
   showAddExpenseModal,
   setShowAddExpenseModal,
+  initialData,
+  onSaveExpense,
 }: AddExpenseModalProps) => {
   const {
     register,
     control,
     watch,
+    handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm<IExpense>();
+  } = useForm<IExpense>({
+    defaultValues: {
+      title: initialData?.title ?? "",
+      amount: initialData?.amount ?? null,
+      date: initialData?.date ?? null,
+      category: initialData?.category ?? null,
+      id: initialData?.id,
+    },
+  });
+
+  useEffect(() => {
+    reset({
+      title: initialData?.title ?? "",
+      amount: initialData?.amount ?? null,
+      date: initialData?.date ?? null,
+      category: initialData?.category ?? null,
+      id: initialData?.id,
+    });
+  }, [initialData, reset]);
 
   const watchedDate = watch("date");
+
+  const onSubmit: SubmitHandler<IExpense> = (data: IExpense) => {
+    onSaveExpense(data);
+  };
   return (
     <Dialog open={showAddExpenseModal} onOpenChange={setShowAddExpenseModal}>
       <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle>New Expense</DialogTitle>
         </DialogHeader>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
               <label className="text-sm font-medium leading-none">Title</label>
@@ -128,13 +157,13 @@ const AddExpenseModal = ({
                     </SelectTrigger>
                     <SelectContent position="popper">
                       <SelectGroup>
-                        {EXPENSE_CATEGORIES.map((category) => (
+                        {Object.entries(EXPENSE_CATEGORIES).map(([value, label]) => (
                           <SelectItem
-                            key={category.value}
-                            value={category.value}
+                            key={value}
+                            value={value}
                             className="cursor-pointer"
                           >
-                            {category.label}
+                            {label}
                           </SelectItem>
                         ))}
                       </SelectGroup>
@@ -152,7 +181,7 @@ const AddExpenseModal = ({
               type="submit"
               className="bg-eastern-blue text-white shadow-lg font-medium text-sm px-8 rounded-md gap-2 py-3 cursor-pointer w-full mt-6"
             >
-              Add Expense
+              {initialData ? "Save Expense" : "Add Expense"}
             </button>
           </DialogFooter>
         </form>

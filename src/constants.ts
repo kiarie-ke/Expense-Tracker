@@ -1,16 +1,16 @@
 // Expense Categories
-export const EXPENSE_CATEGORIES = [
-  { value: "food", label: "Food & Dining" },
-  { value: "transportation", label: "Transportation" },
-  { value: "utilities", label: "Utilities" },
-  { value: "entertainment", label: "Entertainment" },
-  { value: "shopping", label: "Shopping" },
-  { value: "healthcare", label: "Healthcare" },
-  { value: "education", label: "Education" },
-  { value: "travel", label: "Travel" },
-  { value: "bills", label: "Bills & Payments" },
-  { value: "other", label: "Other" },
-] as const;
+export const EXPENSE_CATEGORIES = {
+  food: "Food & Dining",
+  transportation: "Transportation",
+  utilities: "Utilities",
+  entertainment: "Entertainment",
+  shopping: "Shopping",
+  healthcare: "Healthcare",
+  education: "Education",
+  travel: "Travel",
+  bills: "Bills & Payments",
+  other: "Other",
+} as const;
 
 // Currency Settings
 export const CURRENCY = {

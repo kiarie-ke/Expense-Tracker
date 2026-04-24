@@ -1,19 +1,21 @@
 type ICategory = 
-    | "Food"
-    | "Transportation"
-    | "Utilities"
-    | "Entertainment"
-    | "Healthcare"
-    | "Education"
-    | "Personal Care"
-    | "Other";
+    | "food"
+    | "transportation"
+    | "utilities"
+    | "entertainment"
+    | "shopping"
+    | "healthcare"
+    | "education"
+    | "travel"
+    | "bills"
+    | "other";
 
 type IExpense = {
     title: string;
-    category: ICategory |null;
+    category: ICategory | null;
     amount: number | null;
     date: Date | null;
-    Id?: string;
+    id?: string;
 };
 
 export { IExpense, ICategory };
