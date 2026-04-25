@@ -16,6 +16,7 @@ import {
 import StatsCard from "./components/StatsCard";
 import ExpenseChart from "./components/ExpenseChart";
 import TopCategories from "./components/TopCategories";
+import Footer from "./components/Footer";
 
 function App() {
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
@@ -125,7 +126,9 @@ function App() {
           onSaveExpense={handleSaveExpense}
         />
       ) : null}
+      <Footer />
     </div>
+  
   );
 }
 
