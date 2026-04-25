@@ -15,6 +15,7 @@ import {
 } from "./components/shared/ui/Select";
 import StatsCard from "./components/StatsCard";
 import ExpenseChart from "./components/ExpenseChart";
+import TopCategories from "./components/TopCategories";
 
 function App() {
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
@@ -72,7 +73,7 @@ function App() {
         <div className="grid grid-cols-3 mt-8 m-auto gap-8">
           <div className="flex flex-col gap-6">
            <ExpenseChart expenses={expenses} />
-            <span>TopCategories</span>
+            <TopCategories expenses={expenses} />
           </div>
           <div className="p-6 col-span-2 bg-white rounded-2xl border border-mischka/50">
             {expenses.length ? (
