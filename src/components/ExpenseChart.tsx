@@ -28,7 +28,7 @@ const ExpenseChart = ({ expenses }: { expenses: IExpense[] }) => {
       {expenses.length > 0 ? (
         <>
           <h2 className="text-lg font-semibold text-gray-900 mb-6">
-            Spending Breakdown
+            Expenses by Category
           </h2>
           <ResponsiveContainer width="100%" height={350}>
             <BarChart
@@ -42,24 +42,28 @@ const ExpenseChart = ({ expenses }: { expenses: IExpense[] }) => {
               />
               <YAxis
                 tick={{ fontSize: 12, fill: "#6b7280" }}
-                label={{ value: "Amount (KSh)", angle: -90, position: "insideLeft" }}
+                label={{
+                  value: "Amount (KSh)",
+                  angle: -90,
+                  position: "insideLeft",
+                }}
               />
               <Tooltip
-                formatter={(value) => value != null ? `KSh ${Number(value).toLocaleString()}` : "KSh 0"}
                 contentStyle={{
                   backgroundColor: "#fff",
                   border: "1px solid #e5e7eb",
                   borderRadius: "8px",
                 }}
+                cursor={{ fill: "rgba(59, 130, 246, 0.1)" }}
               />
               <Bar
                 dataKey="amount"
                 fill="#3b82f6"
                 radius={[8, 8, 0, 0]}
                 label={{
-                  position: "top",
-                  formatter: (label: number | string) =>
-                    `KSh ${Number(label).toLocaleString()}`,
+                  position: "top" as const,
+                  formatter: (value: unknown) =>
+                    `KSh ${(value as number).toLocaleString()}`,
                   fontSize: 11,
                   fill: "#1f2937",
                 }}

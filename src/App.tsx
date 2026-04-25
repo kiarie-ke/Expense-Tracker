@@ -15,8 +15,6 @@ import {
 } from "./components/shared/ui/Select";
 import StatsCard from "./components/StatsCard";
 import ExpenseChart from "./components/ExpenseChart";
-import TopCategories from "./components/TopCategories";
-import Footer from "./components/Footer";
 
 function App() {
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
@@ -29,7 +27,7 @@ function App() {
     // Convert date strings back to Date objects
     return parsed.map((expense: IExpense) => ({
       ...expense,
-      date: new Date(expense.date),
+      date: expense.date ? new Date(expense.date) : new Date(),
     }));
   });
 
@@ -74,7 +72,7 @@ function App() {
         <div className="grid grid-cols-3 mt-8 m-auto gap-8">
           <div className="flex flex-col gap-6">
            <ExpenseChart expenses={expenses} />
-            <TopCategories expenses={expenses}/>
+            <span>TopCategories</span>
           </div>
           <div className="p-6 col-span-2 bg-white rounded-2xl border border-mischka/50">
             {expenses.length ? (
@@ -126,9 +124,7 @@ function App() {
           onSaveExpense={handleSaveExpense}
         />
       ) : null}
-      <Footer />
     </div>
-    
   );
 }
 
