@@ -6,7 +6,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from "recharts";
 
@@ -46,7 +45,7 @@ const ExpenseChart = ({ expenses }: { expenses: IExpense[] }) => {
                 label={{ value: "Amount (KSh)", angle: -90, position: "insideLeft" }}
               />
               <Tooltip
-                formatter={(value: number) => `KSh ${value.toLocaleString()}`}
+                formatter={(value) => value != null ? `KSh ${Number(value).toLocaleString()}` : "KSh 0"}
                 contentStyle={{
                   backgroundColor: "#fff",
                   border: "1px solid #e5e7eb",

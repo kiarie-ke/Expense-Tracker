@@ -13,6 +13,7 @@ const StatsCard = ({ expenses }: { expenses: IExpense[] }) => {
 
     return expenses
       .filter((expense) => {
+        if (!expense.date) return false;
         const expenseDate = new Date(expense.date);
         return (
           expenseDate.getMonth() === currentMonth &&
