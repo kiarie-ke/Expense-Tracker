@@ -89,7 +89,7 @@ const AddExpenseModal = ({
             <div className="flex gap-4">
               <div className="flex flex-col gap-2 w-full">
                 <label className="text-sm font-medium leading-none">
-                  Amount ($)
+                  Amount (Ksh)
                 </label>
                 <Input
                   placeholder="0.00"

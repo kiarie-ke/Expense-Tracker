@@ -14,8 +14,8 @@ export const EXPENSE_CATEGORIES = {
 
 // Currency Settings
 export const CURRENCY = {
-  symbol: "$",
-  code: "USD",
+  symbol: "Ksh",
+  code: "KES",
   decimalPlaces: 2,
 } as const;
 

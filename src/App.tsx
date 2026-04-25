@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import AddExpenseModal from "./components/AddExpenseModal";
 import type { IExpense } from "./types/expense";
@@ -14,12 +14,27 @@ import {
   SelectValue,
 } from "./components/shared/ui/Select";
 import StatsCard from "./components/StatsCard";
+import ExpenseChart from "./components/ExpenseChart";
 
 function App() {
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
   const [selectedExpense, setSelectedExpense] = useState<IExpense | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [expenses, setExpense] = useState<IExpense[]>([]);
+  const [expenses, setExpense] = useState<IExpense[]>(() => {
+    const saved = localStorage.getItem("expenses");
+    if (!saved) return [];
+    const parsed = JSON.parse(saved);
+    // Convert date strings back to Date objects
+    return parsed.map((expense: IExpense) => ({
+      ...expense,
+      date: new Date(expense.date),
+    }));
+  });
+
+  // Save expenses to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem("expenses", JSON.stringify(expenses));
+  }, [expenses]);
 
   const handleSaveExpense = (formData: IExpense) => {
     if (formData.id) {
@@ -56,7 +71,7 @@ function App() {
         <StatsCard expenses={expenses}/>
         <div className="grid grid-cols-3 mt-8 m-auto gap-8">
           <div className="flex flex-col gap-6">
-            <span>ExpenseChart</span>
+           <ExpenseChart expenses={expenses} />
             <span>TopCategories</span>
           </div>
           <div className="p-6 col-span-2 bg-white rounded-2xl border border-mischka/50">

@@ -32,7 +32,7 @@ const ExpenseList = ({
           </div>
           <div className="flex flex-col items-end gap-2">
             <span className="font-semibold text-eastern-blue">
-              ${expense.amount?.toFixed(2) ?? "0.00"}
+              Ksh {expense.amount?.toFixed(2) ?? "0.00"}
             </span>
             <div className="flex gap-2">
               <button
