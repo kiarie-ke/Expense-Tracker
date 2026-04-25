@@ -12,7 +12,7 @@ const Header = ({
           <div className="w-9 h-9 bg-eastern-blue flex justify-center items-center rounded-xl py-4">
             <Wallet className="h-4 w-4 text-white" />
           </div>
-          <h1 className="text-lg font-bold tracking-tight">ExpenseFlow</h1>
+          <h1 className="text-lg font-bold tracking-tight">ExpenseTracker</h1>
         </div>
         <button
           className="bg-eastern-blue text-white flex items-center shadow-lg font-medium text-sm px-8 rounded-md gap-2 py-3 cursor-pointer"
